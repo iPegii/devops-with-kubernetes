@@ -1,10 +1,13 @@
-import express from "express"
+const path = require("path")
+const express = require("express")
+
 const app = express()
 
 const port = process.env.PORT
 
 app.get('/', (req, res) => {
-    res.send('hello world')
+    res.sendFile(path.join(__dirname, 'index.html'));
+
   })
 
 app.listen(port, () => {

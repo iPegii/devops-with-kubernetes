@@ -14,8 +14,8 @@ spec:
     spec:
       containers:
         - name: todo-app
-          image: todo-app
-          imagePullPolicy: Never
+          image: ipegii/the_project:1.5
+          imagePullPolicy: Always
           resources:
             requests:
               cpu: "100m"
