@@ -1,5 +1,5 @@
 {
-  "name": "log-output",
+  "name": "log-responder",
   "version": "1.0.0",
   "main": "index.js",
   "type": "commonjs",

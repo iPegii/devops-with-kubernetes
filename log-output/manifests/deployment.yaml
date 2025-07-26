@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: log-output
+  name: log-output-deployment
 spec:
   replicas: 1
   selector:
@@ -12,10 +12,29 @@ spec:
       labels:
         app: log-output
     spec:
+      volumes: # Define volume
+        - name: shared-image
+          emptyDir: {}
       containers:
-        - name: log-output
-          image: ipegii/log-output:1.7.2
+        - name: log-writer
+          image: ipegii/dwk-log-writer:1.10.1
           imagePullPolicy: Always
+          volumeMounts: # Mount volume
+          - name: shared-image
+            mountPath: /usr/src/app/files
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+        - name: log-responder
+          image: ipegii/dwk-log-responder:1.10.2
+          imagePullPolicy: Always
+          volumeMounts: # Mount volume
+          - name: shared-image
+            mountPath: /usr/src/app/files
           resources:
             requests:
               cpu: "100m"
