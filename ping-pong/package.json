@@ -1,0 +1,19 @@
+{
+  "name": "ping-pong",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iPegii/devops-with-kubernetes"
+  },
+  "author": "iPegii",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
