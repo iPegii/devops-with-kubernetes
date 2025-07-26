@@ -14,8 +14,8 @@ spec:
     spec:
       containers:
         - name: log-output
-          image: log-output
-          imagePullPolicy: Never
+          image: ipegii/log-output:1.7.2
+          imagePullPolicy: Always
           resources:
             requests:
               cpu: "100m"

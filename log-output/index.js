@@ -1,5 +1,10 @@
-import fs from "node:fs";
+const path = require("path")
+const express = require("express")
+const fs = require("node:fs")
 
+const app = express()
+
+const port = process.env.PORT
 
 const generateAndSaveString = () => {
     const string = crypto.randomUUID()
@@ -13,7 +18,7 @@ const outputString = () => {
     try {
         const timestamp = new Date()
         const data = fs.readFileSync('./string.txt', 'utf8');
-        console.log(timestamp, ": ", data)
+        return `${timestamp}:  ${data}`
       } catch (err) {
         console.error(err);
       }
@@ -22,8 +27,17 @@ const outputString = () => {
 const main =  () => {
     generateAndSaveString()
         setInterval(() => {
-            outputString()
+            console.log(outputString())
         },5000)
     
 }
+
 main()
+
+app.get('/', (req, res) => {
+    res.send(outputString())
+  })
+
+app.listen(port, () => {
+console.log(`Server started in port ${port}`)
+})
