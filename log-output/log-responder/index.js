@@ -14,10 +14,32 @@ const readString = () => {
       }
 }
 
+const readPongs = () => {
+    try {
+        const data = fs.readFileSync('/usr/src/app/files/pongs.txt', 'utf8');
+        return Number(data)
+      } catch (err) {
+        console.error(err);
+        return 0 // Return zero on first run
+      }
+}
+
+const writePongs = (pongs) => {
+    try {
+        fs.writeFileSync('/usr/src/app/files/pongs.txt', pongs.toString());
+        } catch (err) {
+        console.error(err);
+    }
+}
+
 app.get('/', (req, res) => {
     console.log("received GET")
     const string = readString()
-    res.send(string)
+    const oldPongs = readPongs()
+    const newPongs = oldPongs + 1
+    console.log(oldPongs, newPongs)
+    writePongs(newPongs)
+    res.send(`<div><p>${string}.</p><p>Ping / Pongs: ${newPongs}</p></div>`)
   })
 
 app.listen(port, () => {

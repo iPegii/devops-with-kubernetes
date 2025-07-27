@@ -12,15 +12,16 @@ spec:
       labels:
         app: log-output
     spec:
-      volumes: # Define volume
-        - name: shared-image
-          emptyDir: {}
+      volumes:
+        - name: shared-log-output
+          persistentVolumeClaim:
+            claimName: log-output-claim
       containers:
         - name: log-writer
           image: ipegii/dwk-log-writer:1.10.1
           imagePullPolicy: Always
           volumeMounts: # Mount volume
-          - name: shared-image
+          - name: shared-log-output
             mountPath: /usr/src/app/files
           resources:
             requests:
@@ -30,10 +31,10 @@ spec:
               cpu: "500m"
               memory: "256Mi"
         - name: log-responder
-          image: ipegii/dwk-log-responder:1.10.2
+          image: ipegii/dwk-log-responder:1.11.7
           imagePullPolicy: Always
           volumeMounts: # Mount volume
-          - name: shared-image
+          - name: shared-log-output
             mountPath: /usr/src/app/files
           resources:
             requests:
