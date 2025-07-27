@@ -12,10 +12,17 @@ spec:
       labels:
         app: todo-app
     spec:
+      volumes:
+        - name: shared-todo-app
+          persistentVolumeClaim:
+            claimName: todo-app-claim
       containers:
         - name: todo-app
-          image: ipegii/the_project:1.5
+          image: ipegii/the_project:1.12
           imagePullPolicy: Always
+          volumeMounts: # Mount volume
+          - name: shared-todo-app
+            mountPath: /usr/src/app/files
           resources:
             requests:
               cpu: "100m"
