@@ -16,6 +16,18 @@ app.get('/', async (req, res) => {
       <div>
       <h1>The Project App</h1>
       <img src="/daily-image.jpg" alt="Random image"/>
+      <form>
+      <input type="text" placeholder="Type here..." maxlength="140"/>
+      <button type="submit">Submit</button>
+      </form>
+      <div>
+      <h2>Todos</h2>
+      <ul>
+      <li>Learn Kubernetes</li>
+      <li>Build awesome apps</li>
+      <li>Contribute to Open Source</li>
+      </ul>
+      </div>
       <p>DevOps with Kubernetes 2025</p>
       </div>
       `);
