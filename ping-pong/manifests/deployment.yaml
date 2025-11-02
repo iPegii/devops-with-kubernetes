@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: ping-pong
-          image: ipegii/ping-pong:1.9.3
+          image: ipegii/ping-pong:2.1.1
           imagePullPolicy: Always
           resources:
             requests:

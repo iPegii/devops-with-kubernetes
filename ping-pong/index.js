@@ -7,7 +7,11 @@ let pongs = 0
 app.get('/pingpong', (req, res) => {
     pongs += 1
     res.send(`Pong ${"o".repeat(pongs)}`)
-  })
+})
+
+app.get('/pings', (req, res) => {
+    res.send(pongs)
+})
 
 app.listen(port, () => {
 console.log(`Server started in port ${port}`)

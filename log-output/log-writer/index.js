@@ -2,7 +2,8 @@ const fs = require("node:fs")
 
 const formatString = (randString) => {
         const timestamp = new Date()
-        return `${timestamp}:  ${randString}`
+        const isoTimestamp = timestamp.toISOString();
+        return `${isoTimestamp}:  ${randString}`
 }
 
 const main =  () => {
