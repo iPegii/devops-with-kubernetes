@@ -7,6 +7,11 @@ spec:
   selector:
     app: todo-app
   ports:
-    - port: 2345
+    - name: http-todo-app
+      port: 2345
       protocol: TCP
       targetPort: 3000
+    - name: http-todo-backend
+      port: 2346
+      protocol: TCP
+      targetPort: 3001

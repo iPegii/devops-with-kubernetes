@@ -13,15 +13,29 @@ spec:
         app: todo-app
     spec:
       volumes:
-        - name: shared-todo-app
+        - name: shared-todo-volume
           persistentVolumeClaim:
-            claimName: todo-app-claim
+            claimName: todo-volume-claim
       containers:
         - name: todo-app
-          image: ipegii/the_project:1.13
+          image: ipegii/the_project-todo-app:2.2.3
           imagePullPolicy: Always
           volumeMounts: # Mount volume
-          - name: shared-todo-app
+          - name: shared-todo-volume
+            mountPath: /usr/src/app/files
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+            containers:
+        - name: todo-backend
+          image: ipegii/the_project-todo-backend:2.2.3
+          imagePullPolicy: Always
+          volumeMounts: # Mount volume
+          - name: shared-todo-volume
             mountPath: /usr/src/app/files
           resources:
             requests:

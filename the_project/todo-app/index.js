@@ -12,20 +12,20 @@ app.get("/daily-image.jpg", (req, res) => {
 });
 app.get('/', async (req, res) => {
     await checkImage()
+    const response = await fetch('http://todo-app-svc:2346/todos')
+    const todos = await response.json();
     res.send(`
       <div>
       <h1>The Project App</h1>
       <img src="/daily-image.jpg" alt="Random image"/>
-      <form>
-      <input type="text" placeholder="Type here..." maxlength="140"/>
+      <form method="POST" action="http://localhost:8081/todos">
+      <input type="text" placeholder="Type here..." maxlength="140" name="task"/>
       <button type="submit">Submit</button>
       </form>
       <div>
       <h2>Todos</h2>
       <ul>
-      <li>Learn Kubernetes</li>
-      <li>Build awesome apps</li>
-      <li>Contribute to Open Source</li>
+      ${todos.map(todo => `<li>${todo.task}</li>`).join('')}
       </ul>
       </div>
       <p>DevOps with Kubernetes 2025</p>
@@ -34,7 +34,7 @@ app.get('/', async (req, res) => {
   })
 
 app.listen(port, () => {
-console.log(`Server started in port ${port}`)
+console.log(`todo-app started in port ${port}`)
 })
 
 const checkImage = async () => {
